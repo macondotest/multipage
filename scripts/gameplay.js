@@ -192,7 +192,6 @@ document.querySelectorAll('.option button').forEach(button => {
         currentBalance -= wagerAmount;
         await updateBalanceInDB(currentBalance);
         await updateBalanceDisplay();
-        updateCurrentBetDisplay();
 
         // Draw cards and update Firestore
         const drawnCards = drawCards(4);
@@ -214,7 +213,7 @@ document.querySelectorAll('.option button').forEach(button => {
             alert('Congrats! You guessed the cards! You have won ' + winnings.toFixed(1) + ' points!');
         } else {
             alert('Sorry, try again!');
-        }}, 3000 + (drawnCards.length - 1) * 500);
+        } updateCurrentBetDisplay();}, 3000 + (drawnCards.length - 1) * 500);
     });
 });
 
