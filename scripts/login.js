@@ -8,6 +8,7 @@ const firebaseConfig = {
     appId: "1:853635517373:web:f5439d310e3e114ecba0d4"
 };
 firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 // Show specific view based on authentication status
 function showGame() {
