@@ -1,0 +1,157 @@
+/* General styles */
+body, html {
+margin: 0;
+padding: 0;
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+}
+
+.hidden {
+display: none;
+}
+
+.game-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+min-height: 100vh;
+overflow: auto; /* Enables scrolling for overflow content */
+}
+
+.top-padding {
+height: 50px; /* Adds a top space at the beginning of the container */
+width: 100%;
+}
+
+.control-area {
+width: 100%;
+display: flex;
+justify-content: space-around; /* Distributes items evenly /
+align-items: center; / Vertical alignment */
+padding: 10px;
+box-sizing: border-box;
+background-color: #fff;
+margin-bottom: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card-area {
+display: flex;
+justify-content: space-around;
+align-items: center;
+width: 100%;
+flex-wrap: nowrap; /* Ensures cards do not wrap */
+}
+
+.card-wrapper {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 5px;
+}
+
+.card-placeholder {
+font-size: 12px;
+color: #333; /* Ensuring the placeholders are clearly visible as text */
+}
+
+.card-slot {
+width: 100px;
+height: 140px;
+border: 2px solid black;
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+background-size: cover;
+background-position: center;
+backface-visibility: hidden;
+}
+
+.card-slot.flip {
+animation: flip 2s ease-in-out;
+}
+
+@keyframes flip {
+0% {
+transform: rotateY(0deg);
+}
+50% {
+transform: rotateY(90deg);
+}
+100% {
+transform: rotateY(180deg);
+}
+}
+
+.balance-display, #reshuffle, .current-bet-display, input[type="number"] {
+margin: 10px;
+}
+
+.betting-area, .bet-options {
+width: 100%;
+display: flex;
+justify-content: center;
+flex-wrap: wrap; /* Allows wrapping for smaller screens */
+}
+
+.option {
+margin: 10px;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 8px;
+background-color: #fff;
+}
+
+@media (max-width: 600px) {
+.control-area, .bet-options, .card-area {
+flex-direction: row; /* Ensures horizontal layout /
+justify-content: center;
+}
+.card-slot {
+width: 80px; / Smaller card slots for smaller screens */
+height: 112px;
+}
+}
+
+/* Styles for Sign Up and Login Views */
+#signupView, #loginView {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+}
+
+#signupView h2, #loginView h2 {
+margin-bottom: 20px;
+}
+
+#signupForm, #loginForm {
+display: flex;
+flex-direction: column;
+width: 300px;
+}
+
+#signupForm input, #loginForm input {
+margin-bottom: 10px;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+#signupForm button, #loginForm button {
+padding: 10px;
+border: none;
+border-radius: 4px;
+background-color: #4CAF50;
+color: white;
+cursor: pointer;
+}
+
+#signupForm button
+, #loginForm button
+{
+background-color: #45a049;
+}
