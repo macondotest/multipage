@@ -22,9 +22,16 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const password = document.getElementById('loginPassword').value;
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
+            console.log('User logged in: ', userCredential.user);
             showGame();
         })
         .catch((error) => {
-            console.error(error);
+            console.error('Error during login: ', error);
+            alert('Invalid credentials. Please try again.');
         });
+});
+
+// Add 'Go to Signup' button functionality
+document.getElementById('goToSignup').addEventListener('click', function() {
+    window.location.href = "../signup/index.html";
 });
