@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Play</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <div id="gameView">
+        <!-- Existing game HTML code -->
+        <div class="game-container">
+            <div class="top-padding">
+                <div class="balance-display">Balance: <span id="balance">0</span></div>
+                <button id="withdrawBalance" class="hidden">Withdraw Balance</button>
+                <button id="topUpBalance" class="hidden">Top Up Balance</button>
+                <button id="logout" class="hidden">Logout</button>
+            </div>
+            <div class="card-area">
+                <div class="card-wrapper">
+                    <div class="card-placeholder">Card 1</div>
+                    <div class="card-slot" id="card1"></div>
+                </div>
+                <div class="card-wrapper">
+                    <div class="card-placeholder">Card 2</div>
+                    <div class="card-slot" id="card2"></div>
+                </div>
+                <div class="card-wrapper">
+                    <div class="card-placeholder">Card 3</div>
+                    <div class="card-slot" id="card3"></div>
+                </div>
+                <div class="card-wrapper">
+                    <div class="card-placeholder">Card 4</div>
+                    <div class="card-slot" id="card4"></div>
+                </div>
+            </div>
+            <div class="control-area">
+                <div class="current-bet-display">Current Bet: <span id="currentBet"></span></div>
+                <input type="number" id="wagerAmount" placeholder="INSERT WAGER AMOUNT">
+                <button id="reshuffle">RESHUFFLE</button>
+            </div>
+            <div class="betting-area">
+                <div class="bet-options">
+                    <div class="option">
+                        <div>SUM</div>
+                        <select id="sumOptions">
+                            <option value="270725:8">Sum 8, multiplier 270725</option>
+                            <option value="3:9-29">Sum 9 to 29, multiplier 3</option>
+                            <option value="3.1:30-36">Sum 30 to 36, multiplier 3.1</option>
+                            <option value="2.9:37-59">Sum 37 to 59, multiplier 2.9</option>
+                            <option value="270725:60">Sum 60, multiplier 270725</option>
+                        </select>
+                        <button data-bet-type="sum">PLACE BET</button>
+                    </div>
+                    <div class="option">
+                        <div>BLACK/RED</div>
+                        <select id="colorOptions">
+                            <option value="8.5:3black">3 black, multiplier 8.5</option>
+                            <option value="8.5:3red">3 red, multiplier 8.5</option>
+                            <option value="18.1:4black">4 black, multiplier 18.1</option>
+                            <option value="18.1:4red">4 red, multiplier 18.1</option>
+                        </select>
+                        <button data-bet-type="color">PLACE BET</button>
+                    </div>
+                    <div class="option">
+                        <div>MACONDO</div>
+                        <select id="macondoOptions">
+                            <option value="39.5:Low,Low,Low">Low, Low, Low, multiplier 39.5</option>
+                            <option value="34.5:Low,Low,Mid">Low, Low, Mid, multiplier 34.5</option>
+                            <option value="27.6:Low,Low,High">Low, Low, High, multiplier 27.6</option>
+                            <option value="34.5:Low,Mid,Low">Low, Mid, Low, multiplier 34.5</option>
+                            <option value="34.5:Low,Mid,Mid">Low, Mid, Mid, multiplier 34.5</option>
+                            <option value="25.9:Low,Mid,High">Low, Mid, High, multiplier 25.9</option>
+                            <option value="27.6:Low,High,Low">Low, High, Low, multiplier 27.6</option>
+                            <option value="25.9:Low,High,Mid">Low, High, Mid, multiplier 25.9</option>
+                            <option value="21.8:Low,High,High">Low, High, High, multiplier 21.8</option>
+                            <option value="34.5:Mid,Low,Low">Mid, Low, Low, multiplier 34.5</option>
+                            <option value="34.5:Mid,Low,Mid">Mid, Low, Mid, multiplier 34.5</option>
+                            <option value="25.9:Mid,Low,High">Mid, Low, High, multiplier 25.9</option>
+                            <option value="34.5:Mid,Mid,Low">Mid, Mid, Low, multiplier 34.5</option>
+                            <option value="39.5:Mid,Mid,Mid">Mid, Mid, Mid, multiplier 39.5</option>
+                            <option value="27.6:Mid,Mid,High">Mid, Mid, High, multiplier 27.6</option>
+                            <option value="25.9:Mid,High,Low">Mid, High, Low, multiplier 25.9</option>
+                            <option value="27.6:Mid,High,Mid">Mid, High, Mid, multiplier 27.6</option>
+                            <option value="21.8:Mid,High,High">Mid, High, High, multiplier 21.8</option>
+                            <option value="27.6:High,Low,Low">High, Low, Low, multiplier 27.6</option>
+                            <option value="25.9:High,Low,Mid">High, Low, Mid, multiplier 25.9</option>
+                            <option value="21.8:High,Low,High">High, Low, High, multiplier 21.8</option>
+                            <option value="25.9:High,Mid,Low">High, Mid, Low, multiplier 25.9</option>
+                            <option value="27.6:High,Mid,Mid">High, Mid, Mid, multiplier 27.6</option>
+                            <option value="21.8:High,Mid,High">High, Mid, High, multiplier 21.8</option>
+                            <option value="21.8:High,High,Low">High, High, Low, multiplier 21.8</option>
+                            <option value="21.8:High,High,Mid">High, High, Mid, multiplier 21.8</option>
+                            <option value="19.4:High,High,High">High, High, High, multiplier 19.4</option>
+                            <option value="148.7:Low,Low,Low,Low">Low, Low, Low, Low, multiplier 148.7</option>
+                            <option value="120.9:Low,Low,Low,Mid">Low, Low, Low, Mid, multiplier 120.9</option>
+                            <option value="96.7:Low,Low,Low,High">Low, Low, Low, High, multiplier 96.7</option>
+                            <option value="120.9:Low,Low,Mid,Low">Low, Low, Mid, Low, multiplier 120.9</option>
+                            <option value="112.8:Low,Low,Mid,Mid">Low, Low, Mid, Mid, multiplier 112.8</option>
+                            <option value="84.6:Low,Low,Mid,High">Low, Low, Mid, High, multiplier 84.6</option>
+                            <option value="96.7:Low,Low,High,Low">Low, Low, High, Low, multiplier 96.7</option>
+                            <option value="84.6:Low,Low,High,Mid">Low, Low, High, Mid, multiplier 84.6</option>
+                            <option value="71.2:Low,Low,High,High">Low, Low, High, High, multiplier 71.2</option>
+                            <option value="120.9:Low,Mid,Low,Low">Low, Mid, Low, Low, multiplier 120.9</option>
+                            <option value="112.8:Low,Mid,Low,Mid">Low, Mid, Low, Mid, multiplier 112.8</option>
+                            <option value="84.6:Low,Mid,Low,High">Low, Mid, Low, High, multiplier 84.6</option>
+                            <option value="112.8:Low,Mid,Mid,Low">Low, Mid, Mid, Low, multiplier 112.8</option>
+                            <option value="120.9:Low,Mid,Mid,Mid">Low, Mid, Mid, Mid, multiplier 120.9</option>
+                            <option value="84.6:Low,Mid,Mid,High">Low, Mid, Mid, High, multiplier 84.6</option>
+                            <option value="84.6:Low,Mid,High,Low">Low, Mid, High, Low, multiplier 84.6</option>
+                            <option value="84.6:Low,Mid,High,Mid">Low, Mid, High, Mid, multiplier 84.6</option>
+                            <option value="66.8:Low,Mid,High,High">Low, Mid, High, High, multiplier 66.8</option>
+                            <option value="96.7:Low,High,Low,Low">Low, High, Low, Low, multiplier 96.7</option>
+                            <option value="84.6:Low,High,Low,Mid">Low, High, Low, Mid, multiplier 84.6</option>
+                            <option value="71.2:Low,High,Low,High">Low, High, Low, High, multiplier 71.2</option>
+                            <option value="84.6:Low,High,Mid,Low">Low, High, Mid, Low, multiplier 84.6</option>
+                            <option value="84.6:Low,High,Mid,Mid">Low, High, Mid, Mid, multiplier 84.6</option>
+                            <option value="66.8:Low,High,Mid,High">Low, High, Mid, High, multiplier 66.8</option>
+                            <option value="71.2:Low,High,High,Low">Low, High, High, Low, multiplier 71.2</option>
+                            <option value="66.8:Low,High,High,Mid">Low, High, High, Mid, multiplier 66.8</option>
+                            <option value="59.4:Low,High,High,High">Low, High, High, High, multiplier 59.4</option>
+                            <option value="120.9:Mid,Low,Low,Low">Mid, Low, Low, Low, multiplier 120.9</option>
+                            <option value="112.8:Mid,Low,Low,Mid">Mid, Low, Low, Mid, multiplier 112.8</option>
+                            <option value="84.6:Mid,Low,Low,High">Mid, Low, Low, High, multiplier 84.6</option>
+                            <option value="112.8:Mid,Low,Mid,Low">Mid, Low, Mid, Low, multiplier 112.8</option>
+                            <option value="120.9:Mid,Low,Mid,Mid">Mid, Low, Mid, Mid, multiplier 120.9</option>
+                            <option value="84.6:Mid,Low,Mid,High">Mid, Low, Mid, High, multiplier 84.6</option>
+                            <option value="84.6:Mid,Low,High,Low">Mid, Low, High, Low, multiplier 84.6</option>
+                            <option value="84.6:Mid,Low,High,Mid">Mid, Low, High, Mid, multiplier 84.6</option>
+                            <option value="66.8:Mid,Low,High,High">Mid, Low, High, High, multiplier 66.8</option>
+                            <option value="112.8:Mid,Mid,Low,Low">Mid, Mid, Low, Low, multiplier 112.8</option>
+                            <option value="120.9:Mid,Mid,Low,Mid">Mid, Mid, Low, Mid, multiplier 120.9</option>
+                            <option value="84.6:Mid,Mid,Low,High">Mid, Mid, Low, High, multiplier 84.6</option>
+                            <option value="120.9:Mid,Mid,Mid,Low">Mid, Mid, Mid, Low, multiplier 120.9</option>
+                            <option value="148.7:Mid,Mid,Mid,Mid">Mid, Mid, Mid, Mid, multiplier 148.7</option>
+                            <option value="96.7:Mid,Mid,Mid,High">Mid, Mid, Mid, High, multiplier 96.7</option>
+                            <option value="84.6:Mid,Mid,High,Low">Mid, Mid, High, Low, multiplier 84.6</option>
+                            <option value="96.7:Mid,Mid,High,Mid">Mid, Mid, High, Mid, multiplier 96.7</option>
+                            <option value="71.2:Mid,Mid,High,High">Mid, Mid, High, High, multiplier 71.2</option>
+                            <option value="84.6:Mid,High,Low,Low">Mid, High, Low, Low, multiplier 84.6</option>
+                            <option value="84.6:Mid,High,Low,Mid">Mid, High, Low, Mid, multiplier 84.6</option>
+                            <option value="66.8:Mid,High,Low,High">Mid, High, Low, High, multiplier 66.8</option>
+                            <option value="84.6:Mid,High,Mid,Low">Mid, High, Mid, Low, multiplier 84.6</option>
+                            <option value="96.7:Mid,High,Mid,Mid">Mid, High, Mid, Mid, multiplier 96.7</option>
+                            <option value="71.2:Mid,High,Mid,High">Mid, High, Mid, High, multiplier 71.2</option>
+                            <option value="66.8:Mid,High,High,Low">Mid, High, High, Low, multiplier 66.8</option>
+                            <option value="71.2:Mid,High,High,Mid">Mid, High, High, Mid, multiplier 71.2</option>
+                            <option value="59.4:Mid,High,High,High">Mid, High, High, High, multiplier 59.4</option>
+                            <option value="96.7:High,Low,Low,Low">High, Low, Low, Low, multiplier 96.7</option>
+                            <option value="84.6:High,Low,Low,Mid">High, Low, Low, Mid, multiplier 84.6</option>
+                            <option value="71.2:High,Low,Low,High">High, Low, Low, High, multiplier 71.2</option>
+                            <option value="84.6:High,Low,Mid,Low">High, Low, Mid, Low, multiplier 84.6</option>
+                            <option value="84.6:High,Low,Mid,Mid">High, Low, Mid, Mid, multiplier 84.6</option>
+                            <option value="66.8:High,Low,Mid,High">High, Low, Mid, High, multiplier 66.8</option>
+                            <option value="71.2:High,Low,High,Low">High, Low, High, Low, multiplier 71.2</option>
+                            <option value="66.8:High,Low,High,Mid">High, Low, High, Mid, multiplier 66.8</option>
+                            <option value="59.4:High,Low,High,High">High, Low, High, High, multiplier 59.4</option>
+                            <option value="84.6:High,Mid,Low,Low">High, Mid, Low, Low, multiplier 84.6</option>
+                            <option value="84.6:High,Mid,Low,Mid">High, Mid, Low, Mid, multiplier 84.6</option>
+                            <option value="66.8:High,Mid,Low,High">High, Mid, Low, High, multiplier 66.8</option>
+                            <option value="84.6:High,Mid,Mid,Low">High, Mid, Mid, Low, multiplier 84.6</option>
+                            <option value="96.7:High,Mid,Mid,Mid">High, Mid, Mid, Mid, multiplier 96.7</option>
+                            <option value="71.2:High,Mid,Mid,High">High, Mid, Mid, High, multiplier 71.2</option>
+                            <option value="66.8:High,Mid,High,Low">High, Mid, High, Low, multiplier 66.8</option>
+                            <option value="71.2:High,Mid,High,Mid">High, Mid, High, Mid, multiplier 71.2</option>
+                            <option value="59.4:High,Mid,High,High">High, Mid, High, High, multiplier 59.4</option>
+                            <option value="71.2:High,High,Low,Low">High, High, Low, Low, multiplier 71.2</option>
+                            <option value="66.8:High,High,Low,Mid">High, High, Low, Mid, multiplier 66.8</option>
+                            <option value="59.4:High,High,Low,High">High, High, Low, High, multiplier 59.4</option>
+                            <option value="66.8:High,High,Mid,Low">High, High, Mid, Low, multiplier 66.8</option>
+                            <option value="71.2:High,High,Mid,Mid">High, High, Mid, Mid, multiplier 71.2</option>
+                            <option value="59.4:High,High,Mid,High">High, High, Mid, High, multiplier 59.4</option>
+                            <option value="59.4:High,High,High,Low">High, High, High, Low, multiplier 59.4</option>
+                            <option value="59.4:High,High,High,Mid">High, High, High, Mid, multiplier 59.4</option>
+                            <option value="55.9:High,High,High,High">High, High, High, High, multiplier 55.9</option>
+                        </select>
+                        <button data-bet-type="macondo">PLACE BET</button>
+                    </div>
+                </div>
+            </div>
+            <div class="instructions">
+                <p>Instructions: input your wager amount between 1 and your current balance before choosing a bet. You have 3 types of bets at your disposal, each coupled with its multiplier. You draw 4 cards out of a standard deck of 52 with every bet.</p>
+                <p>SUM bet - bet on the numerical sum of the cards that will be drawn. If the sum of the cards that are drawn falls in the range you have chosen, you win! If not, you lose. 2 is the lowest card, and Ace is the highest with the numerical value of 15.</p>
+                <p>COLOR bet - bet on the color of the cards that will be drawn. Choose between black and red and 3 or 4 cards. But choose wisely - if you bet on 3 cards of same color, and 4 of same color are drawn, you don't win! You win only if you guess the color AND number of cards!</p>
+                <p>MACONDO bet - our specialty! You need to place your bet on a sequence of 3 or 4 cards from 3 different categories of cards:</p>
+                <ul>
+                    <li>Low - 2,3,4,5 in all suits</li>
+                    <li>Mid - 6,7,8,9 in all suits</li>
+                    <li>High - 10,J,Q,K,A in all suits</li>
+                </ul>
+                <p>Once you place your wager amount and pick your bet, click on the PLACE BET button next to the bet you picked to draw the cards and see if you were lucky! If you want to clear the table and play again, click on the RESHUFFLE button.</p>
+                <p>Good luck!</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="../scripts/gameplay.js"></script>
+</body>
+</html>
