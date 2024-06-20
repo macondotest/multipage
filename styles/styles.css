@@ -106,17 +106,12 @@ body, html {
 
 @media (max-width: 600px) {
     .control-area, .bet-options, .card-area {
-        flex-direction: row; /* Change to column layout for smaller screens */
-        align-items: center; /* Center items */
+        flex-direction: row; /* Ensures horizontal layout */
+        justify-content: center;
     }
-
     .card-slot {
         width: 80px; /* Smaller card slots for smaller screens */
         height: 112px;
-    }
-
-    .option {
-        width: 100%; /* Full width for options on smaller screens */
     }
 }
 
