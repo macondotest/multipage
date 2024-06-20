@@ -72,6 +72,7 @@ document.getElementById('withdrawBalance').addEventListener('click', function() 
             balance_at_withdrawal_request: balance
         }).then(() => {
             document.getElementById('withdrawBalance').disabled = true;
+            document.getElementById('topUpBalance').disabled = true;
             alert('Your request to withdraw balance has been registered and will be processed as soon as possible! Thank you!');
             document.querySelectorAll('.option button').forEach(button => {
                 button.disabled = true;
@@ -94,6 +95,7 @@ document.getElementById('topUpBalance').addEventListener('click', function() {
             balance_at_top_up_request: balance
         }).then(() => {
             document.getElementById('topUpBalance').disabled = true;
+            document.getElementById('withdrawBalance').disabled = true;
             alert('Your request to top up your balance has been registered and you will soon receive an email with instructions on how to top up your balance!');
             document.querySelectorAll('.option button').forEach(button => {
                 button.disabled = true;
