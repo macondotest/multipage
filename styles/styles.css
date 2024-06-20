@@ -23,7 +23,7 @@ body, html {
     width: 100%;
 }
 
-.control-area {
+.control-area, .button-area {
     width: 100%;
     display: flex;
     justify-content: space-around; /* Distributes items evenly */
@@ -105,7 +105,7 @@ body, html {
 }
 
 @media (max-width: 600px) {
-    .control-area, .bet-options, .card-area {
+    .control-area, .button-area, .bet-options, .card-area {
         flex-direction: row; /* Ensures horizontal layout */
         justify-content: center;
     }
