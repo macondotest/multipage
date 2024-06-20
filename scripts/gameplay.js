@@ -40,10 +40,12 @@ function fetchUserData(user) {
         if (doc.exists) {
             const data = doc.data();
             document.getElementById('balance').textContent = data.balance;
-            document.getElementById('withdrawBalance').disabled = data.withdraw_balance || data.balance === 0;
-            document.getElementById('topUpBalance').disabled = data.top_up_balance;
+            const withdrawDisabled = data.withdraw_balance || data.top_up_balance || data.balance === 0;
+            const topUpDisabled = data.top_up_balance || data.withdraw_balance;
+            document.getElementById('withdrawBalance').disabled = withdrawDisabled;
+            document.getElementById('topUpBalance').disabled = topUpDisabled;
             document.querySelectorAll('.option button').forEach(button => {
-                button.disabled = data.withdraw_balance || data.top_up_balance;
+                button.disabled = withdrawDisabled || topUpDisabled;
             });
             document.getElementById('withdrawBalance').classList.remove('hidden');
             document.getElementById('topUpBalance').classList.remove('hidden');
