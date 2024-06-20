@@ -40,7 +40,11 @@ function fetchUserData(user) {
         if (doc.exists) {
             const data = doc.data();
             document.getElementById('balance').textContent = data.balance;
-            document.getElementById('withdrawBalance').disabled = data.withdraw_balance;
+            document.getElementById('withdrawBalance').disabled = data.withdraw_balance || data.balance === 0;
+            document.getElementById('topUpBalance').disabled = data.top_up_balance;
+            document.querySelectorAll('.option button').forEach(button => {
+                button.disabled = data.withdraw_balance || data.top_up_balance;
+            });
             document.getElementById('withdrawBalance').classList.remove('hidden');
             document.getElementById('topUpBalance').classList.remove('hidden');
             document.getElementById('logout').classList.remove('hidden');
@@ -69,6 +73,9 @@ document.getElementById('withdrawBalance').addEventListener('click', function() 
         }).then(() => {
             document.getElementById('withdrawBalance').disabled = true;
             alert('Your request to withdraw balance has been registered and will be processed as soon as possible! Thank you!');
+            document.querySelectorAll('.option button').forEach(button => {
+                button.disabled = true;
+            });
         }).catch((error) => {
             console.error("Error updating document: ", error);
         });
@@ -79,10 +86,18 @@ document.getElementById('withdrawBalance').addEventListener('click', function() 
 document.getElementById('topUpBalance').addEventListener('click', function() {
     const user = firebase.auth().currentUser;
     if (user) {
+        const balanceElement = document.getElementById('balance');
+        const balance = parseInt(balanceElement.textContent, 10);
         db.collection('users').doc(user.uid).update({
-            top_up_balance: true
+            top_up_balance: true,
+            datetime_top_up_requested: new Date().toISOString(),
+            balance_at_top_up_request: balance
         }).then(() => {
+            document.getElementById('topUpBalance').disabled = true;
             alert('Your request to top up your balance has been registered and you will soon receive an email with instructions on how to top up your balance!');
+            document.querySelectorAll('.option button').forEach(button => {
+                button.disabled = true;
+            });
         }).catch((error) => {
             console.error("Error updating document: ", error);
         });
@@ -150,7 +165,8 @@ async function updateDrawnCardsInDB(drawnCards, selectedOption) {
     if (user) {
          await db.collection('users').doc(user.uid).update({
             drawnCards: drawnCards,
-            bet: selectedOption
+            bet: selectedOption,
+            datetime_bet: new Date().toISOString()
         }).then(() => {
             console.log('Drawn cards and bet updated in Firestore:', drawnCards, selectedOption);
         }).catch((error) => {
