@@ -106,7 +106,7 @@ body, html {
 
 @media (max-width: 600px) {
     .control-area, .bet-options, .card-area {
-        flex-direction: column; /* Change to column layout for smaller screens */
+        flex-direction: row; /* Change to column layout for smaller screens */
         align-items: center; /* Center items */
     }
 
