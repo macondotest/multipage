@@ -211,7 +211,7 @@ document.querySelectorAll('.option button').forEach(button => {
         }
 
         if (isNaN(wagerAmount) || wagerAmount < minimumWager) {
-            alert(`Invalid wager amount. Minimum wager is ' + minimumWager + ' points.`);
+            alert(`Invalid wager amount. Minimum wager is ${minimumWager} points.`);
             return;
         }
 
