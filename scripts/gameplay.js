@@ -186,10 +186,6 @@ document.querySelectorAll('.option button').forEach(button => {
         const optionElementId = betType + 'Options';
         const selectedOption = document.getElementById(optionElementId).value;
         const wagerAmount = parseInt(document.getElementById('wagerAmount').value, 10);
-        if (isNaN(wagerAmount) || wagerAmount < 5) {
-            alert('Invalid wager amount.');
-            return;
-        }
 
         // Fetch the latest balance from Firestore
         const user = firebase.auth().currentUser;
@@ -204,36 +200,51 @@ document.querySelectorAll('.option button').forEach(button => {
             return;
         }
 
-        let currentBalance = userDoc.data().balance;
+        const currentBalance = userDoc.data().balance;
+
+        // Determine minimum wager amount based on current balance
+        let minimumWager = 5;
+        if (currentBalance >= 1000) {
+            minimumWager = 50;
+        } else if (currentBalance >= 500) {
+            minimumWager = 10;
+        }
+
+        if (isNaN(wagerAmount) || wagerAmount < minimumWager) {
+            alert(`Invalid wager amount. Minimum wager is ' + minimumWager + ' points.`);
+            return;
+        }
+
         if (wagerAmount > currentBalance) {
             alert('Insufficient balance.');
             return;
         }
-        currentBalance -= wagerAmount;
-        await updateBalanceInDB(currentBalance);
+
+        // Deduct wager amount from current balance
+        let newBalance = currentBalance - wagerAmount;
+        await updateBalanceInDB(newBalance);
         await updateBalanceDisplay();
+        updateCurrentBetDisplay();
 
         // Draw cards and update Firestore
         const drawnCards = drawCards(4);
-        if (!Array.isArray(drawnCards)) {
-            console.error('drawnCards is not an array:', drawnCards);
-            return;
-        }
+        console.log('Drawn cards:', drawnCards); // Debug log
         displayDrawnCards(drawnCards);
         await updateDrawnCardsInDB(drawnCards, selectedOption);
 
         // Evaluate bet and update balance if won
-        const { win, multiplier, winnings } = evaluateBet(betType, exactType, drawnCards, wagerAmount, selectedOption);
+        const { win, multiplier, winnings } = evaluateBet(betType, drawnCards, wagerAmount, selectedOption);
         setTimeout(async () => {
             if (win) {
-            const winnings = wagerAmount * multiplier;
-            currentBalance += winnings;
-            await updateBalanceInDB(currentBalance);
-            await updateBalanceDisplay();
-            alert('Congrats! You guessed the cards! You have won ' + winnings.toFixed(1) + ' points!');
-        } else {
-            alert('Sorry, try again!');
-        } updateCurrentBetDisplay();}, 3000 + (drawnCards.length - 1) * 500);
+                const winnings = wagerAmount * multiplier;
+                newBalance += winnings;
+                await updateBalanceInDB(newBalance);
+                await updateBalanceDisplay();
+                alert('Congrats! You guessed the cards! You have won ' + winnings.toFixed(1) + ' points!');
+            } else {
+                alert('Sorry, try again!');
+            }
+        }, 3000 + (drawnCards.length - 1) * 500);
     });
 });
 
