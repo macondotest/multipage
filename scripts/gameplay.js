@@ -208,7 +208,11 @@ document.querySelectorAll('.option button').forEach(button => {
         if (wagerAmount > currentBalance) {
             alert('Insufficient balance.');
             return;
+            } else if ((currentBalance >= 500 && wagerAmount < 25) || (currentBalance >= 1000 && wagerAmount < 50)) {
+            alert('Insufficient wager amount.');
+            return;
         }
+        
         currentBalance -= wagerAmount;
         await updateBalanceInDB(currentBalance);
         await updateBalanceDisplay();
