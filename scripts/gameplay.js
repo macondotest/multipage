@@ -308,11 +308,11 @@ function evaluateBet(betType, exactType, drawnCards, wagerAmount, selectedOption
 }
     function handleSumBet(drawnCards, wagerAmount, selectedOption) {
        const sumRanges = {
-        '270725:8': {min: 8, max: 8},
-        '3:9-29': {min: 9, max: 29},
-        '3.1:30-36': {min: 30, max: 36},
-        '2.9:37-59': {min: 37, max: 59},
-        '270725:60': {min: 60, max: 60}
+        '250000:8': {min: 8, max: 8},
+        '2:9-29': {min: 9, max: 29},
+        '2:30-36': {min: 30, max: 36},
+        '2:37-59': {min: 37, max: 59},
+        '250000:60': {min: 60, max: 60}
     };
         console.log('Selected option for sum bet:', selectedOption);
     if (!sumRanges[selectedOption]) {
@@ -328,10 +328,10 @@ function evaluateBet(betType, exactType, drawnCards, wagerAmount, selectedOption
     // Placeholder for other handle functions
     function handleColorBet(drawnCards, selectedOption) {
         const betMultipliers = {
-        '3black': 8.5,
-        '3red': 8.5,
-        '4black': 18.1,
-        '4red': 18.1
+        '3black': 7,
+        '3red': 7,
+        '4black': 16,
+        '4red': 16
     };
     const count = { 'black': 0, 'red': 0 };
     drawnCards.forEach(card => {
