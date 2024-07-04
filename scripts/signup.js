@@ -42,7 +42,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
                         // Create a Firestore document for the new user
                         db.collection('users').doc(user.uid).set({
                             email: user.email,
-                            source: user.source,
+                            source: source,
                             balance: 0, // Initial balance
                             withdraw_balance: false,
                             top_up_balance: false,
